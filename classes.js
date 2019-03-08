@@ -65,10 +65,10 @@ class Manager extends Employee{
     this.reports = [];
   }
   hire(employee){
-    return this.reports = this.reports.push(employee)
+    this.reports.push(employee)
   }
   fire(employee){
-    return this.reports = this.reports.splice(this.reports.index)
+    this.reports.splice(employee, 1)
   }
 }
 
@@ -76,25 +76,60 @@ class Manager extends Employee{
 ////////// PROBLEM 3 //////////
 
 /*
-  Managers for Widget Co. get promoted when they get more employees, and get a bonus when they fire employees.
-  create a class ProgressiveManager that extends Manager.  A Progressive Manager has all of the same properties as a manager with the following additional properties:
-    - title - default 'Not a manager'
-    - bonus - default 0
+Managers for Widget Co. get promoted when they get more employees, and get a bonus when they fire employees.
+create a class ProgressiveManager that extends Manager.  A Progressive Manager has all of the same properties as a manager with the following additional properties:
+- title - default 'Not a manager'
+- bonus - default 0
 
-  When employees are hired or fired, the manager's title should be updated based on the number of reports.
-    0 reports : Not a manager
-    1-3 reports : Barely Manager
-    4-10 reports : Mostly Manager
-    11-50 reports : Manager
-    51-100 reports : Manager Plus
-    101+ reports : Bestest Manager
+When employees are hired or fired, the manager's title should be updated based on the number of reports.
+0 reports : Not a manager
+1-3 reports : Barely Manager
+4-10 reports : Mostly Manager
+11-50 reports : Manager
+51-100 reports : Manager Plus
+101+ reports : Bestest Manager
 
-  Everytime they fire an employee they get $100 added to their bonus.
+Everytime they fire an employee they get $100 added to their bonus.
 
-  Call your new class ProgressiveManager
+Call your new class ProgressiveManager
 */
 
-//Code Here
+class ProgressiveManager extends Manager{
+  constructor(first_name,last_name, email, age, reports){
+    super(first_name, last_name, email, age, reports)
+    this.title = 'Not a manager'
+    this.bonus = 0
+  }
+  hire(employee){
+    this.reports.push(employee)
+    
+    let length = this.reports.length
+    
+    if(length >= 1 && length <= 3){
+      this.title = 'Barely Manager'
+    }
+    else if(length >= 4 && length <= 10){
+      this.title = 'Mostly Manager'
+    }
+    else if (length >= 11 && length <= 50){
+      this.title = 'Manager'
+    }
+    else if (length >= 51 && length <= 100){
+      this.title = 'Manager Plus'
+    }
+    else if (length >= 101){
+      this.title = 'Bestest Manager'
+    }
+  }
+  fire(employee){
+    this.reports.splice(employee, 1)
+
+    this.bonus += 100
+  }
+}
+
+
+
 
 
 
